@@ -3,8 +3,6 @@
 
 #include "HashTable.h"
 
-const int bonusSpace = 30;
-
 int main()
 {
 	srand(time(0));
@@ -16,12 +14,11 @@ int main()
 
 	do
 	{
-		cout << "Введите кол-во человек. Размер хеш-таблиц будет на 30 больше" << endl;
+		cout << "Введите кол-во человек." << endl;
 		cin >> AmountOfHumans;
-	} 
-	while (AmountOfHumans <= 0);
+	} while (AmountOfHumans <= 0);
 
-	HashTable* hashTable = new HashTable(AmountOfHumans + bonusSpace);
+	HashTable* hashTable = new HashTable(AmountOfHumans);
 
 	for (int i = 0; i < AmountOfHumans; i++)
 	{
@@ -38,7 +35,7 @@ int main()
 	while (!should_stop)
 	{
 		int action;
-		cout << "Выберите действие:" << endl << "1. Добавить в таблицу больше элементов." << endl << "2. Добавить один элемент вручную." << endl <<"3. Найти элемент в таблице по ключу." << endl <<"4. Удалить элемент в таблице по ключу." << endl <<"5. Удалить элемент в таблице по значению." << endl <<"6. Записать хеш-таблицу в файл и считать её заново из него." << endl  << "7. Напечатать таблицу" << endl << "8. Закончить исполнение программы." << endl;
+		cout << "Выберите действие:" << endl << "1. Добавить в таблицу больше элементов." << endl << "2. Добавить один элемент вручную." << endl << "3. Найти элемент в таблице по ключу." << endl << "4. Удалить элемент в таблице по ключу." << endl << "5. Удалить элемент в таблице по значению." << endl << "6. Записать хеш-таблицу в файл и считать её заново из него." << endl << "7. Напечатать таблицу" << endl << "8. Закончить исполнение программы." << endl;
 
 		cin >> action;
 
@@ -46,7 +43,7 @@ int main()
 		string key;
 		ofstream output;
 		ifstream input;
-		int index;
+		int index = 0;
 
 		switch (action)
 		{
@@ -91,12 +88,12 @@ int main()
 
 			getline(cin, key);
 
-			index = hashTable->FindByKey(key);
+			human = hashTable->FindByKey(key);
 
-			if (index == -1)
+			if (human.BirthDay == NOTFOUND)
 				cout << "Элемента с таким ключем не существует" << endl;
 			else
-				hashTable->table[index]->Value.Print();
+				human.Print();
 
 			cout << endl;
 
@@ -110,9 +107,7 @@ int main()
 			getline(cin, key);
 
 			if (hashTable->RemoveByKey(key))
-			{
 				cout << "Элемент успешно удален" << endl << endl;
-			}
 			else
 				cout << "Элемента с таким ключем нет в хеш-таблице" << endl;
 
@@ -150,7 +145,7 @@ int main()
 
 				delete hashTable;
 
-				hashTable = new HashTable(AmountOfHumans + bonusSpace);
+				hashTable = new HashTable(AmountOfHumans);
 
 				input.open("F1.bin", ios_base::binary);
 
@@ -175,7 +170,7 @@ int main()
 
 		default:
 
-			cout << "Нету такого действия!!!" << endl << endl;
+			cout << "Нету такого действия" << endl << endl;
 			break;
 		}
 

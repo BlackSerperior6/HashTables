@@ -5,11 +5,11 @@
 
 using namespace std;
 
-string PossibleNames[] = {"Александр" , "Люся", "Мария", "Александр", "Дима", "Деннис", "Светлана", "Валентино", "Аластор"};
+string PossibleNames[] = { "Трофим" , "Яков", " Максим", "Гаянэ", "Дима", "Владлен" };
 
-string PossibleSurnames[] = {"Герасимов", "Дудкин", "Морнингстар", "Собек", "Светлый", "Темный", "Злобный", "Добрый", "Пасхальный"};
+string PossibleSurnames[] = { "Медведев", "Трофимов ", "Мамонтов", "Герасимов", "Емельянов" };
 
-string PossiblePatronimycs[] = {"Викторовна", "Плюшкин", "Зушкин", "Метелкин", "Советсвккий", "Николаевич", "Николаевна", "Пасхальновн", "Тубкин"};
+string PossiblePatronimycs[] = { "Леонидович", "Артёмович", "Феликсович" };
 
 struct Human 
 {
@@ -19,7 +19,7 @@ struct Human
 
 	bool Compare(Human *anotherHuman) 
 	{
-		return FullName == anotherHuman->FullName && PassportNumber == anotherHuman->PassportNumber;
+		return FullName == anotherHuman->FullName && PassportNumber == anotherHuman->PassportNumber && anotherHuman->BirthDay == BirthDay;
 	};
 
 	void Print()
@@ -29,15 +29,15 @@ struct Human
 
 	void RandomlyGenerate()
 	{
-		string name = PossibleNames[rand() % 9];
-		string surname = PossibleSurnames[rand() % 9];
-		string patronimyc = PossiblePatronimycs[rand() % 9];
+		string name = PossibleNames[rand() % 6];
+		string surname = PossibleSurnames[rand() % 5];
+		string patronimyc = PossiblePatronimycs[rand() % 3];
 
-		FullName = name + " " + surname + " " + patronimyc;
+		FullName = surname + " " + name + " " + patronimyc;
 
-		BirthDay = to_string(rand() % 28 + 1) + '.' + to_string(rand() % 12 + 1) + '.' + to_string(rand() % 100 + 2000);
+		BirthDay = to_string(rand() % 28 + 1) + '.' + to_string(rand() % 12 + 1) + '.' + to_string(rand() % 11 + 2000);
 
-		PassportNumber = rand() % 1000;
+		PassportNumber = rand() % 1000 + 1001;
 	}
 
 	void FillByUser() 

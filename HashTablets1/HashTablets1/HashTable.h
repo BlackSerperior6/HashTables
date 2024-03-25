@@ -110,12 +110,6 @@ public:
 		int orgiginalHash = getHash(birthDay);
 		int hash = orgiginalHash;
 
-		if (table[hash] != nullptr && !table[hash]->has_been_deleted  && birthDay == table[hash]->key)
-		{
-			cout << "Ёлемент с данным ключем уже есть в хеш-таблице" << endl;
-			return;
-		}
-
 		bool flag = false;
 		int counterOfTakenPositions = 0;
 
